@@ -1,0 +1,17 @@
+- name: Create a EBS volume
+  hosts: localhost
+  gather_facts: False
+  vars_prompt:
+    - name: "id"
+      prompt: "Mention the volume_id"
+      private: no
+    - name: "region"
+      prompt: "Mention the existng region"
+      default: "us-east-1"
+  tasks:  
+    - name: Deletion volume
+      ec2_vol:
+        region: "{{ region }}"
+     #   id: vol-0e85d0a60a0b887e1 
+        id: "{{ id }}" 
+        state: absent

@@ -1,0 +1,17 @@
+- name: Stopped instances
+  hosts: localhost
+  gather_facts: false
+  connection: local
+  vars_prompt:
+    - name: "region"
+      prompt: "Mention the region"
+      default: "us-east-1"
+    - name: "instance_ids"
+      prompt: "Mention the instance_id"
+      private: no
+  tasks:
+    - name: Stopping instance
+      ec2:
+        region: "{{ region }}"
+        instance_ids: '{{ instance_ids }}'
+        state: stopped

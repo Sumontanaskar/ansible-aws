@@ -1,0 +1,33 @@
+- name: Create a EBS volume
+  hosts: localhost
+  gather_facts: False
+  vars_prompt:
+    - name: "region"
+      prompt: "Mention the region"
+      default: "us-east-1"
+    - name: "volume_type"
+      prompt: "Mention the volume type"
+      default: "gp2"
+    - name: "volume_size"
+      prompt: "Mention volume size"
+      default: "1"
+    - name: "zone"
+      prompt: "Mention the zone"
+      default: "us-east-1a"	   
+    - name: "device_name"
+      prompt: "Mention device name"
+      default: "/dev/xvda"
+    - name: "register"
+      prompt: "Mention Volume Tag name"
+      default: "new volume"   
+  tasks:  
+    - name: Creating Volume
+      ec2_vol:
+        device_name: "{{ device_name }}"
+        region: "{{ region }}"
+        volume_type: "{{ volume_type }}"
+        volume_size: "{{ volume_size }}"
+        zone: "{{ zone }}"
+        name: "{{ register }}"
+      register: "{{ register }}"
+    - debug: var=register
