@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars_prompt:
+    - name: "region"
+      prompt: "Mention the region"
+      default: "us-east-1"
+
+  tasks:
+    - name: remove security group
+      ec2_group_facts:
+        filters:
+          group-id: sg-12345678

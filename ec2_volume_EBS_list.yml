@@ -1,0 +1,16 @@
+- name: list all EBS volume
+  hosts: localhost
+  gather_facts: False
+  vars_prompt:
+    - name: "instance"
+      prompt: "Mention the instance_id"
+      private: no
+    - name: "region"
+      prompt: "Mention the existng region"
+      default: "us-east-1"
+  tasks:  
+    - name: Listng volume
+      ec2_vol:
+        region: "{{ region }}"
+        instance: "{{ instance }}"
+        state: list

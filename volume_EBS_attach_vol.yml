@@ -1,0 +1,30 @@
+- name: Attach an existing volume to instance.
+  hosts: localhost
+  gather_facts: False
+  vars_prompt:
+    - name: "id"
+      prompt: "Mention the volume_id"
+      private: no
+    - name: "instance"
+      prompt: "Mention the instance_id"
+      private: no
+    - name: "device_name"
+      prompt: "Mention the existng volume device_name"
+      default: "/dev/xvda"
+      private: no
+    - name: "dot"
+      prompt: "Mention Volume delete on instance termination?[yes/no]"
+      default: "yes"
+      private: no
+    - name: "region"
+      prompt: "Mention the region"
+      default: "us-east-1"
+      private: no
+  tasks:  
+    - name: attaching an existing volume to instance
+      ec2_vol:
+        region: "{{ region }}"
+        instance: "{{ instance }}"
+        id: "{{ id }}"
+        device_name: "{{ device_name }}"
+        delete_on_termination: "{{ dot }}"
