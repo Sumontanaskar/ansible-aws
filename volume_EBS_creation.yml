@@ -5,21 +5,27 @@
     - name: "region"
       prompt: "Mention the region"
       default: "us-east-1"
+      private: no
     - name: "volume_type"
       prompt: "Mention the volume type"
       default: "gp2"
+      private: no
     - name: "volume_size"
       prompt: "Mention volume size"
       default: "1"
+      private: no
     - name: "zone"
       prompt: "Mention the zone"
       default: "us-east-1a"	   
+      private: no
     - name: "device_name"
       prompt: "Mention device name"
       default: "/dev/xvda"
+      private: no
     - name: "register"
       prompt: "Mention Volume Tag name"
       default: "new volume"   
+      private: no
   tasks:  
     - name: Creating Volume
       ec2_vol:

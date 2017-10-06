@@ -1,4 +1,4 @@
-- name: Create a EBS volume
+- name: Deleting a EBS volume
   hosts: localhost
   gather_facts: False
   vars_prompt:
@@ -8,6 +8,7 @@
     - name: "region"
       prompt: "Mention the existng region"
       default: "us-east-1"
+      private: no
   tasks:  
     - name: Deletion volume
       ec2_vol:

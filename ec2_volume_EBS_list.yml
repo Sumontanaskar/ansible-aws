@@ -8,6 +8,7 @@
     - name: "region"
       prompt: "Mention the existng region"
       default: "us-east-1"
+      private: no
   tasks:  
     - name: Listng volume
       ec2_vol:

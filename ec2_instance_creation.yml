@@ -2,32 +2,40 @@
    hosts: localhost
    gather_facts: False
    vars_prompt:
-     - name: "key_name"
+     - name: "keypair"
        prompt: "Enter instance Key_name"
        default: "Sumonta_personal"
+       private: no
      - name: "instance_type"
        prompt: "Mention Inastance type"
        default: "t2.micro"
+       private: no
      - name: "security_group"
        prompt: "Enter Security Group"
        default: "default"
+       private: no
      - name: "image"
        prompt: "Enter AMI Image"
        default: "ami-4fffc834"
+       private: no
      - name: "region"
        prompt: "Mention the region"
        default: "us-east-1" 
-
+       private: no
+     - name: "vpc_subnet_id"
+       prompt: "Mention the existing subnet id"
+       default: "subnet-9236d4ad"
+       private: no
    tasks:
      - name: Launch instance
        ec2:
-  #:        key_name: "{{ keypair }}"
+          key_name: "{{ keypair }}"
           group: "{{ security_group }}"
           instance_type: "{{ instance_type }}"
           image: "{{ image }}"
           wait: true
           region: "{{ region }}"
-          vpc_subnet_id: subnet-9236d4ad
+          vpc_subnet_id: "{{ vpc_subnet_id }}" 
           assign_public_ip: yes
        register: ec2
 

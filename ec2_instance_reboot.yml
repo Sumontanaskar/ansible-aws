@@ -6,6 +6,7 @@
     - name: "region"
       prompt: "Mention the region"
       default: "us-east-1"
+      private: no
     - name: "instance_ids"
       prompt: "Mention the instance_id"
       private: no
