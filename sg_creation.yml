@@ -1,0 +1,33 @@
+---
+- name: Create Security group
+  hosts: localhost
+  gather_facts: False 
+  vars:
+    name: my_sg
+    description: Security_group
+    state: present
+    region: 
+  tasks:
+    - name: creating security group
+      ec2_group:
+         name: my_sg
+         description: Security_group
+         state: present
+         region: us-east-1
+         vpc_id: 
+         rules_egress: none
+         rules: 
+           - proto: tcp
+             from_port: 22
+             to_port: 22
+             cidr_ip: 0.0.0.0/8
+         rules_egress:
+           - proto: tcp
+             from_port: 80
+             to_port: 80
+             cidr_ip: 0.0.0.0/0
+           - proto: tcp
+             from_port: 443
+             to_port: 443
+             cidr_ip: 0.0.0.0/0 
+      register: sg_info

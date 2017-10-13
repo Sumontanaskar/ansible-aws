@@ -1,0 +1,13 @@
+---
+- name: Delete Security group
+  hosts: localhost
+  gather_facts: False 
+  vars_prompt:
+    name: "gid" 
+    prompt: "Mention the Security group id:"
+    private: no
+  tasks:
+    - name: "Delete group by its id"
+      ec2_group:
+        group_id: "{{ gid }}"
+        state: absent
